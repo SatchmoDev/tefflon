@@ -6,7 +6,7 @@ import { identify } from "@/utils/server"
 import { addDoc, collection } from "firebase/firestore"
 import { redirect } from "next/navigation"
 
-export const request = async (state: unknown, fd: FormData) => {
+export const createRequest = async (state: unknown, fd: FormData) => {
   const user = await identify()
   const { name, email } = shape(fd)
 

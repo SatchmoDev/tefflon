@@ -2,10 +2,10 @@
 
 import Pending from "@/components/pending"
 import { useActionState } from "react"
-import { request } from "./actions"
+import { createRequest } from "./actions"
 
 export default function Form() {
-  const [state, action] = useActionState(request, undefined)
+  const [state, action] = useActionState(createRequest, undefined)
 
   return (
     <form action={action}>
