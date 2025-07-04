@@ -7,15 +7,20 @@ import { addDoc, collection } from "firebase/firestore"
 import { redirect } from "next/navigation"
 
 export const createRequest = async (state: unknown, fd: FormData) => {
-  const user = await identify()
-  const { name, email } = shape(fd)
+  const { uid, email } = await identify()
+  const { name, phone, destination, start, end } = shape(fd)
 
   await addDoc(collection(db, "requests"), {
-    id: user.uid,
+    uid,
+    email,
     name: name.trim(),
-    email: email.trim().toLowerCase(),
+    phone,
+    destination: destination.trim(),
+    start,
+    end,
+    timestamp: Date.now(),
     status: "pending",
   })
 
-  redirect("/")
+  redirect("/requests")
 }

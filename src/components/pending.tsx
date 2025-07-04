@@ -2,7 +2,9 @@
 
 import { useFormStatus } from "react-dom"
 
-export default function Pending() {
+type Props = { text?: string }
+
+export default function Pending({ text = "Submit" }: Props) {
   const { pending } = useFormStatus()
-  return <button disabled={pending}>Submit</button>
+  return <button disabled={pending}>{text}</button>
 }

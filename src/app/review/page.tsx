@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Review" }
 export default async function Review() {
   await identify(true)
 
-  const snap = await getDocs(
+  const { docs } = await getDocs(
     query(collection(db, "requests"), where("status", "==", "pending")),
   )
 
@@ -17,12 +17,12 @@ export default async function Review() {
     <>
       <h1>Review</h1>
 
-      {snap.docs.map((doc) => {
-        const data = doc.data()
+      {docs.map((request) => {
+        const { destination } = request.data()
 
         return (
-          <Link href={`/review/${doc.id}`} key={doc.id}>
-            {data.name}
+          <Link href={`/review/${request.id}`} key={request.id}>
+            <p>{destination}</p>
           </Link>
         )
       })}

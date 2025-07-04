@@ -1,4 +1,5 @@
 import { db } from "@/lib/firebase"
+import { identify } from "@/utils/server"
 import { doc, getDoc } from "firebase/firestore"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
@@ -7,27 +8,34 @@ type Props = { params: Promise<{ id: string }> }
 
 const getRequest = async (params: Props["params"]) => {
   const { id } = await params
-  const snap = await getDoc(doc(db, "requests", id))
+  const request = await getDoc(doc(db, "requests", id))
 
-  if (!snap.exists()) notFound()
-  return snap
+  if (!request.exists()) notFound()
+  return request
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const snap = await getRequest(params)
-  const data = snap.data()
+  const request = await getRequest(params)
+  const { destination } = request.data()
 
-  return { title: data.name }
+  return { title: destination }
 }
 
-export default async function Id({ params }: Props) {
-  const snap = await getRequest(params)
-  const data = snap.data()
+export default async function Request({ params }: Props) {
+  const user = await identify()
+
+  const request = await getRequest(params)
+  const { uid, name, destination, status } = request.data()
+
+  if (user.uid !== uid) notFound()
 
   return (
     <>
-      <p>{data.name}</p>
-      <p>{data.email}</p>
+      <h1>Request</h1>
+
+      <p>{name}</p>
+      <p>{destination}</p>
+      <p>{status}</p>
     </>
   )
 }

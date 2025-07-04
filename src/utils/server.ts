@@ -28,13 +28,17 @@ export const identify = async (admin: boolean = false) => {
 
   if (!session) redirect("/login")
 
-  const { uid } = await auth.verifySessionCookie(session.value)
-  const user = await auth.getUser(uid)
+  try {
+    const { uid } = await auth.verifySessionCookie(session.value)
+    const user = await auth.getUser(uid)
 
-  if (admin) {
-    const claims = user.customClaims
-    if (!claims || !claims.admin) redirect("/login")
+    if (admin) {
+      const claims = user.customClaims
+      if (!claims || !claims.admin) redirect("/login")
+    }
+
+    return user
+  } catch {
+    redirect("/login")
   }
-
-  return user
 }

@@ -12,8 +12,17 @@ export default function Form() {
       <label htmlFor="name">Name</label>
       <input id="name" name="name" type="text" required />
 
-      <label htmlFor="email">Email</label>
-      <input id="email" name="email" type="email" required />
+      <label htmlFor="phone">Phone</label>
+      <input id="phone" name="phone" type="tel" required />
+
+      <label htmlFor="destination">Destination</label>
+      <input id="destination" name="destination" type="text" required />
+
+      <label htmlFor="start">Start</label>
+      <input id="start" name="start" type="date" required />
+
+      <label htmlFor="end">End</label>
+      <input id="end" name="end" type="date" required />
 
       <Pending />
     </form>
