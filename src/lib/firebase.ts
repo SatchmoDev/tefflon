@@ -3,12 +3,13 @@ import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 const app = initializeApp({
-  apiKey: "AIzaSyAyHhVzAyGceFBQAWLjsvXzWvdiF8VnU64",
-  authDomain: "tefflod.firebaseapp.com",
-  projectId: "tefflod",
-  storageBucket: "tefflod.firebasestorage.app",
-  messagingSenderId: "484196876691",
-  appId: "1:484196876691:web:bc34fb01e95a416dd46866",
+  apiKey: "AIzaSyAXpkhih0a1bS7l-tNpZAG_eYYrQuaWZtg",
+  authDomain: "tefflog.firebaseapp.com",
+  projectId: "tefflog",
+  storageBucket: "tefflog.firebasestorage.app",
+  messagingSenderId: "64488639420",
+  appId: "1:64488639420:web:981c4f7659b867d90fb9b9",
+  measurementId: "G-XM29BB64PX",
 })
 
 export const db = getFirestore(app)

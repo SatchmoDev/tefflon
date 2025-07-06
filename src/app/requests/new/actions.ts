@@ -18,8 +18,7 @@ export const createRequest = async (state: unknown, fd: FormData) => {
     destination: destination.trim(),
     start,
     end,
-    timestamp: Date.now(),
-    status: "pending",
+    created: Date.now(),
   })
 
   redirect("/requests")

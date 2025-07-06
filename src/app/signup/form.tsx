@@ -12,6 +12,7 @@ export default function Form() {
 
   return (
     <form
+      className="space-y-6"
       action={async (fd) => {
         const { email, password } = shape(fd)
 
@@ -26,15 +27,31 @@ export default function Form() {
         }
       }}
     >
-      <label htmlFor="email">Email</label>
-      <input id="email" name="email" type="email" required />
+      <div className="form-group">
+        <label htmlFor="email">Email Address</label>
+        <input id="email" name="email" type="email" required />
+        <p className="form-help">
+          Use your official email address for account verification
+        </p>
+      </div>
 
-      <label htmlFor="password">Password</label>
-      <input id="password" name="password" type="password" required />
+      <div className="form-group">
+        <label htmlFor="password">Password</label>
+        <input id="password" name="password" type="password" required />
+        <p className="form-help">
+          Choose a secure password with at least 8 characters
+        </p>
+      </div>
 
-      {error && <p>{error}</p>}
+      {error && (
+        <div className="alert alert-error">
+          {error}
+        </div>
+      )}
 
-      <Pending />
+      <div className="pt-2">
+        <Pending text="Create Account" fullWidth />
+      </div>
     </form>
   )
 }
